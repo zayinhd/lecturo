@@ -1,18 +1,20 @@
 import "./App.css";
-
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Layout from "./pages/Layout";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Student from "./pages/Student";
-import Lecturer from "./pages/Lecturer";
-import NoPage from "./pages/NoPage";
-import AdminLogin from "./pages/AdminLogin";
-import Admin from "./pages/Admin";
-import Lecturers from "./pages/features/studentfeatures/Lecturers";
-import Courses from "./pages/features/studentfeatures/Courses";
-import LCourses from "./pages/features/lecturerfeatures/LCourses";
-import Timetable from "./pages/features/lecturerfeatures/Timetable";
+import {
+    Layout,
+    Home,
+    Login,
+    Student,
+    Lecturer,
+    NoPage,
+    ProtectedRoute,
+    AdminLogin,
+    Admin,
+    Lecturers,
+    Courses,
+    LCourses,
+    Timetable,
+} from "./pages/index";
 
 function App() {
     return (
@@ -28,17 +30,38 @@ function App() {
                     <Route path="admin/login" element={<AdminLogin />} />
 
                     {/* Portals */}
-                    <Route path="student" element={<Student />} />
-                    <Route path="lecturer" element={<Lecturer />} />
-                    <Route path="admin" element={<Admin />} />
+                    <Route
+                        path="student"
+                        element={<ProtectedRoute element={<Student />} />}
+                    />
+                    <Route
+                        path="lecturer"
+                        element={<ProtectedRoute element={<Lecturer />} />}
+                    />
+                    <Route
+                        path="admin"
+                        element={<ProtectedRoute element={<Admin />} />}
+                    />
 
                     {/* student routes */}
-                    <Route path="student/courses" element={<Courses />} />
-                    <Route path="student/lecturers" element={<Lecturers />} />
+                    <Route
+                        path="student/courses"
+                        element={<ProtectedRoute element={<Courses />} />}
+                    />
+                    <Route
+                        path="student/lecturers"
+                        element={<ProtectedRoute element={<Lecturers />} />}
+                    />
 
                     {/* lecturer routes */}
-                    <Route path="lecturer/courses" element={<LCourses />} />
-                    <Route path="lecturer/timetable" element={<Timetable />} />
+                    <Route
+                        path="lecturer/courses"
+                        element={<ProtectedRoute element={<LCourses />} />}
+                    />
+                    <Route
+                        path="lecturer/timetable"
+                        element={<ProtectedRoute element={<Timetable />} />}
+                    />
 
                     {/* Any other non existent page */}
                     <Route path="*" element={<NoPage />} />
